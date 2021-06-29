@@ -1,0 +1,97 @@
+<div class="container">
+    <h3 style="text-align: center; margin-top:10px; margin-bottom:10px"><b>Add Product Form</b></h3>
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <form [formGroup]="addNewProductForm">
+                <div class="form-group">
+                    <label>
+                        Product Name
+                        <span class="mandatory"> *</span>
+                    </label>
+                    <input type="text"
+                           name="name"
+                           class="form-control"
+                           formControlName="productName"
+                           autocomplete="off"
+                           [class.border-danger]="addNewProductForm.get('productName').invalid && (addNewProductForm.get('productName').dirty || addNewProductForm.get('productName').touched || isFormSubmitted)"/>
+                        <div *ngFor="let validation of validationMessages.productName">
+                            <small class="text-danger error" *ngIf="addNewProductForm.get('productName').hasError(validation.type) && (addNewProductForm.get('productName').dirty || addNewProductForm.get('productName').touched || isFormSubmitted)">
+                                     {{validation.message}}
+                            </small>
+                         </div>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Price
+                        <span class="mandatory"> *</span>
+                    </label>
+                    <input type="number"
+                           name="price"
+                           class="form-control"
+                           formControlName="price"
+                           autocomplete="off"
+                           [class.border-danger]="addNewProductForm.get('price').invalid && (addNewProductForm.get('price').dirty || addNewProductForm.get('price').touched || isFormSubmitted)"/>
+                        <div *ngFor="let validation of validationMessages.price">
+                            <small class="text-danger error" *ngIf="addNewProductForm.get('price').hasError(validation.type) && (addNewProductForm.get('price').dirty || addNewProductForm.get('price').touched || isFormSubmitted)">
+                                     {{validation.message}}
+                            </small>
+                         </div>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Selling Price
+                        <span class="mandatory"> *</span>
+                    </label>
+                    <input type="number"
+                           name="sellingPrice"
+                           class="form-control"
+                           formControlName="sellingPrice"
+                           autocomplete="off"
+                           [class.border-danger]="addNewProductForm.get('sellingPrice').invalid && (addNewProductForm.get('sellingPrice').dirty || addNewProductForm.get('sellingPrice').touched || isFormSubmitted)"/>
+                        <div *ngFor="let validation of validationMessages.sellingPrice">
+                            <small class="text-danger error" *ngIf="addNewProductForm.get('sellingPrice').hasError(validation.type) && (addNewProductForm.get('sellingPrice').dirty || addNewProductForm.get('sellingPrice').touched || isFormSubmitted)">
+                                     {{validation.message}}
+                            </small>
+                         </div>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Manufactured By
+                        <span class="mandatory"> *</span>
+                    </label>
+                    <input type="text"
+                           name="manufacturedBy"
+                           class="form-control"
+                           formControlName="manufacturedBy"
+                           autocomplete="off"
+                           [class.border-danger]="addNewProductForm.get('manufacturedBy').invalid && (addNewProductForm.get('manufacturedBy').dirty || addNewProductForm.get('manufacturedBy').touched || isFormSubmitted)"/>
+                        <div *ngFor="let validation of validationMessages.manufacturedBy">
+                            <small class="text-danger error" *ngIf="addNewProductForm.get('manufacturedBy').hasError(validation.type) && (addNewProductForm.get('manufacturedBy').dirty || addNewProductForm.get('manufacturedBy').touched || isFormSubmitted)">
+                                     {{validation.message}}
+                            </small>
+                         </div>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Category
+                        <span class="mandatory"> *</span>
+                    </label>
+                    <input type="text"
+                           name="category"
+                           class="form-control"
+                           formControlName="category"
+                           autocomplete="off"
+                           [class.border-danger]="addNewProductForm.get('category').invalid && (addNewProductForm.get('category').dirty || addNewProductForm.get('category').touched || isFormSubmitted)"/>
+                        <div *ngFor="let validation of validationMessages.category">
+                            <small class="text-danger error" *ngIf="addNewProductForm.get('category').hasError(validation.type) && (addNewProductForm.get('category').dirty || addNewProductForm.get('category').touched || isFormSubmitted)">
+                                     {{validation.message}}
+                            </small>
+                         </div>
+                </div>
+                <button class="btn my-2 mx-3" (click)="resetForm()">Reset</button>
+                <button class="btn my-2 mx-3" (click)="addNewProduct()">Add</button>
+            </form>
+        </div>
+    </div>
+</div>
