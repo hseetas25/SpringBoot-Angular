@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { ProductService } from 'src/app/services';
 import { Product } from 'src/app/models';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-update-product',
@@ -12,6 +13,7 @@ import { Product } from 'src/app/models';
 })
 export class UpdateProductComponent implements OnInit {
 
+  isLoggedIn: boolean;
   updateProductForm: FormGroup;
   isFormSubmitted: boolean;
   isRequestInProgress: boolean;
@@ -39,9 +41,12 @@ export class UpdateProductComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private toastrService: ToastrService,
   ) {
     this.isFormSubmitted = false;
     this.isRequestInProgress = false;
+    this.isLoggedIn = false;
+    this.loggedIn();
   }
 
   ngOnInit(): void {
@@ -84,13 +89,23 @@ export class UpdateProductComponent implements OnInit {
       this.productService.updateProduct(this.id, productDetails).subscribe((data) => {
         if(data) {
           this.productService.getProductsList();
-          this.router.navigateByUrl("/products");
+          this.router.navigateByUrl('/products');
+          this.toastrService.success('Successfully', 'Product Updated');
         }
         else {
-          this.router.navigateByUrl("/products");
+          this.toastrService.error('Error Occured');
+          this.router.navigateByUrl('/products');
         }
         this.isFormSubmitted = false;
       });
+    }
+  }
+
+  loggedIn(): void {
+    if (localStorage.getItem('userId')) {
+      this.isLoggedIn = true;
+    } else {
+    this.router.navigateByUrl('admin-login');
     }
   }
 }

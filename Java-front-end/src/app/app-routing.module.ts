@@ -4,13 +4,15 @@ import {
   AddNewProductComponent,
   ProductListComponent,
   PageNotFoundComponent,
-  UpdateProductComponent
+  UpdateProductComponent,
+  AdminLoginComponent
 } from './components';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'products', pathMatch: 'full' },
+  { path: '', redirectTo: 'admin-login', pathMatch: 'full' },
   { path: 'products', component: ProductListComponent },
+  { path: 'admin-login', component: AdminLoginComponent},
   { path: 'add-product', component: AddNewProductComponent},
   { path: 'products/update-product/:id', component: UpdateProductComponent },
   { path: '**', component: PageNotFoundComponent }
@@ -26,5 +28,6 @@ export class AppRoutingModule {
     AddNewProductComponent,
     UpdateProductComponent,
     PageNotFoundComponent,
+    AdminLoginComponent,
   ]
 }

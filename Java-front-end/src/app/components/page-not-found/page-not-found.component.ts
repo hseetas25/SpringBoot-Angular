@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-page-not-found',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageNotFoundComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private toastrService: ToastrService,
+  ) { }
 
   ngOnInit(): void {
+    this.toastrService.warning('URL not found!', '404');
   }
 
 }

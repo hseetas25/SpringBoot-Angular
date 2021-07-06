@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { ProductService } from 'src/app/services';
 import { Product } from 'src/app/models';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { Product } from 'src/app/models';
 })
 export class AddNewProductComponent implements OnInit {
 
+  isLoggedIn: boolean;
   addNewProductForm: FormGroup;
   isFormSubmitted: boolean;
   isRequestInProgress: boolean;
@@ -37,9 +39,12 @@ export class AddNewProductComponent implements OnInit {
     private productService: ProductService,
     private formBuilder: FormBuilder,
     private router: Router,
+    private toastrService: ToastrService,
   ) {
     this.isFormSubmitted = false;
     this.isRequestInProgress = false;
+    this.isLoggedIn = false;
+    this.loggedIn();
   }
 
   ngOnInit(): void {
@@ -74,9 +79,11 @@ export class AddNewProductComponent implements OnInit {
         if(data) {
           this.productService.getProductsList();
           this.router.navigateByUrl("/products");
+          this.toastrService.success('Successfully', 'Product Added');
         }
         else {
           this.router.navigateByUrl("/products");
+          this.toastrService.error('', 'Error Occured');
         }
         this.isFormSubmitted = false;
       })
@@ -85,5 +92,13 @@ export class AddNewProductComponent implements OnInit {
 
   resetForm(): void {
     this.addNewProductForm.reset();
+  }
+
+  loggedIn(): void {
+    if (localStorage.getItem('userId')) {
+      this.isLoggedIn = true;
+    } else {
+    this.router.navigateByUrl("admin-login");
+    }
   }
 }

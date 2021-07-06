@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 import { Product } from 'src/app/models';
 import { ProductService } from 'src/app/services';
@@ -11,12 +12,16 @@ import { ProductService } from 'src/app/services';
 })
 export class ProductListComponent implements OnInit {
 
+  isLoggedIn: boolean;
   products: Product[];
   constructor(
     private productService: ProductService,
     private router : Router,
-    private activatedRoute: ActivatedRoute,
-  ) { }
+    private toastrService: ToastrService,
+  ) { 
+    this.isLoggedIn = false;
+    this.loggedIn();
+  }
 
   ngOnInit(): void {
     this.getProducts();
@@ -41,12 +46,22 @@ export class ProductListComponent implements OnInit {
     this.productService.deleteProduct(id).subscribe((data => {
       if(data) {
         this.getProducts();
-        this.router.navigateByUrl("/products");
+        this.router.navigateByUrl('/products');
+        this.toastrService.success('Successfully', 'Product Deleted');
       }
       else {
-        this.router.navigateByUrl("/products");
+        this.toastrService.error('', 'Error Occured');
+        this.router.navigateByUrl('/products');
       }
     }))
+  }
+
+  loggedIn(): void {
+    if (localStorage.getItem('userId')) {
+      this.isLoggedIn = true;
+    } else {
+      this.router.navigateByUrl('/admin-login');
+    }
   }
 
 }

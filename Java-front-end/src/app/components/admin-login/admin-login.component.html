@@ -1,0 +1,57 @@
+<body>
+    <div *ngIf="!isLoggedIn" class="container">
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-md-6">
+                <form [formGroup]="loginForm" (ngSubmit)="getCredentials()">
+                    <br>
+                    <br>
+                <fieldset>
+                    <i class="fas fa-5x fa-shopping-cart" ></i>
+                    <br>
+                    <br>
+                    <h1 style="text-align: center;color:#C70039;">Admin Login</h1>
+                    <div class="form-group">
+                        <label>User ID
+                            <span class="mandatory"> *</span>
+                        </label>
+                        <input type="text"
+                               name="username"
+                               id="un"
+                               class="form-control"
+                               formControlName="username"
+                               autocomplete="off"
+                               [class.border-danger]="loginForm.get('username').invalid && (loginForm.get('username').dirty || loginForm.get('username').touched || isFormSubmitted)">
+                               <div *ngFor="let validation of validationMessages.username">
+                                <small class="text-danger error" *ngIf="loginForm.get('username').hasError(validation.type) && (loginForm.get('username').dirty || loginForm.get('username').touched || isFormSubmitted)">
+                                         {{validation.message}}
+                                </small>
+                                </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Password
+                            <span class="mandatory"> *</span>
+                        </label>
+                        <input type="password"
+                               name="password"
+                               id="pwd"
+                               class="form-control"
+                               formControlName="password"
+                               autocomplete="off"
+                               [class.border-danger]="loginForm.get('password').invalid && (loginForm.get('password').dirty || loginForm.get('password').touched || isFormSubmitted)">
+                               <div *ngFor="let validation of validationMessages.password">
+                                <small class="text-danger error" *ngIf="loginForm.get('password').hasError(validation.type) && (loginForm.get('password').dirty || loginForm.get('password').touched || isFormSubmitted)">
+                                         {{validation.message}}
+                                </small>
+                                </div>
+                    </div>
+                    <button class="btn d-block mx-auto mt-3"
+                            type="submit"
+                            value="submit">Login
+                    </button>
+                </fieldset>
+            </form>
+            </div>
+        </div>
+    </div>
+</body>
