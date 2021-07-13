@@ -68,25 +68,25 @@ export class AddNewProductComponent implements OnInit {
       category: new FormControl(
         '', [Validators.required]
       )
-    })
+    });
   }
 
   addNewProduct(): void {
     this.isFormSubmitted = true;
-    if(this.addNewProductForm.valid && !this.isRequestInProgress) {
+    if (this.addNewProductForm.valid && !this.isRequestInProgress) {
       const productData: Product = JSON.parse(JSON.stringify(this.addNewProductForm.value)) as Product;
-      this.productService.addNewProduct(productData).subscribe((data) =>{
-        if(data) {
+      this.productService.addNewProduct(productData).subscribe((data) => {
+        if (data) {
           this.productService.getProductsList();
-          this.router.navigateByUrl("/products");
+          this.router.navigateByUrl('/products');
           this.toastrService.success('Successfully', 'Product Added');
         }
         else {
-          this.router.navigateByUrl("/products");
+          this.router.navigateByUrl('/products');
           this.toastrService.error('', 'Error Occured');
         }
         this.isFormSubmitted = false;
-      })
+      });
     }
   }
 
@@ -98,7 +98,7 @@ export class AddNewProductComponent implements OnInit {
     if (localStorage.getItem('userId')) {
       this.isLoggedIn = true;
     } else {
-    this.router.navigateByUrl("admin-login");
+    this.router.navigateByUrl('admin-login');
     }
   }
 }

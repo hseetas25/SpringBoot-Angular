@@ -50,11 +50,11 @@ export class UpdateProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.id = this.activatedRoute.snapshot.params['id'];
+    this.id = this.activatedRoute.snapshot.params.id;
     this.productService.getProductById(this.id).subscribe((data) => {
       this.productData = data;
       this.initializeForm();
-    })
+    });
   }
 
   initializeForm(): void {
@@ -74,20 +74,20 @@ export class UpdateProductComponent implements OnInit {
       category: new FormControl(
         this.productData.category, [Validators.required]
       )
-    })
+    });
   }
 
   resetForm(): void {
     this.initializeForm();
   }
 
-  updateProduct() : void {
+  updateProduct(): void {
     this.isFormSubmitted = false;
     if (this.updateProductForm.valid && !this.isRequestInProgress) {
       this.isRequestInProgress = true;
       const productDetails: Product = JSON.parse(JSON.stringify(this.updateProductForm.value)) as Product;
       this.productService.updateProduct(this.id, productDetails).subscribe((data) => {
-        if(data) {
+        if (data) {
           this.productService.getProductsList();
           this.router.navigateByUrl('/products');
           this.toastrService.success('Successfully', 'Product Updated');

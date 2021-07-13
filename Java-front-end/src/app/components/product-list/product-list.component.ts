@@ -16,9 +16,9 @@ export class ProductListComponent implements OnInit {
   products: Product[];
   constructor(
     private productService: ProductService,
-    private router : Router,
+    private router: Router,
     private toastrService: ToastrService,
-  ) { 
+  ) {
     this.isLoggedIn = false;
     this.loggedIn();
   }
@@ -28,23 +28,23 @@ export class ProductListComponent implements OnInit {
   }
 
   private getProducts(): void {
-    this.productService.getProductsList().subscribe((data) =>{
-      if(data && data.length) {
+    this.productService.getProductsList().subscribe((data) => {
+      if (data && data.length) {
         this.products = data;
       }
       else {
-        console.log("No Products Available");
+        console.log('No Products Available');
       }
-    })
+    });
   }
 
-  updateProduct(id: number) : void {
+  updateProduct(id: number): void {
     this.router.navigate(['products/update-product', id]);
   }
 
   deleteProduct(id: number): void {
     this.productService.deleteProduct(id).subscribe((data => {
-      if(data) {
+      if (data) {
         this.getProducts();
         this.router.navigateByUrl('/products');
         this.toastrService.success('Successfully', 'Product Deleted');
@@ -53,7 +53,7 @@ export class ProductListComponent implements OnInit {
         this.toastrService.error('', 'Error Occured');
         this.router.navigateByUrl('/products');
       }
-    }))
+    }));
   }
 
   loggedIn(): void {

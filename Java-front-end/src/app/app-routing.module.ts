@@ -5,7 +5,8 @@ import {
   ProductListComponent,
   PageNotFoundComponent,
   UpdateProductComponent,
-  AdminLoginComponent
+  AdminLoginComponent,
+  AdminProfileComponent
 } from './components';
 
 
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'admin-login', component: AdminLoginComponent},
   { path: 'add-product', component: AddNewProductComponent},
   { path: 'products/update-product/:id', component: UpdateProductComponent },
+  { path: 'update-admin-profile', component: AdminProfileComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -23,11 +25,12 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {
-  static components =[
+  static components = [
     ProductListComponent,
     AddNewProductComponent,
     UpdateProductComponent,
     PageNotFoundComponent,
     AdminLoginComponent,
-  ]
+    AdminProfileComponent
+  ];
 }

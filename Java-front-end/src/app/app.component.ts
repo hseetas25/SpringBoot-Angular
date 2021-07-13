@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
-import { LoginService } from './services'
+import { LoginService } from './services';
 
 @Component({
   selector: 'app-root',
@@ -17,14 +16,11 @@ export class AppComponent {
     private toastrService: ToastrService,
   ) {
     this.isLoggedIn = false;
-  }
-
-  ngOnInit(): void {
     this.isAdminLoggedIn();
   }
 
   isAdminLoggedIn(): void {
-    const data = localStorage.getItem("userId");
+    const data = localStorage.getItem('userId');
     if (data) {
       this.isLoggedIn = true;
       this.loginService.isAdminLoggedIn();
@@ -35,6 +31,7 @@ export class AppComponent {
     localStorage.clear();
     this.loginService.logout();
     this.isLoggedIn = false;
-    this.toastrService.success('Successfully', 'Logged Out')
+    this.toastrService.success('Successfully', 'Logged Out');
   }
+
 }

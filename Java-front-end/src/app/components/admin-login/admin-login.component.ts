@@ -43,9 +43,9 @@ export class AdminLoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      username:new FormControl(
+      username: new FormControl(
         '', [Validators.required]),
-      password:new FormControl(
+      password: new FormControl(
         '', [Validators.required]),
     });
   }
@@ -53,17 +53,17 @@ export class AdminLoginComponent implements OnInit {
   getCredentials(): void {
     this.isFormSubmitted = true;
     if (this.loginForm.invalid) {
-      this.toastrService.error('Are required', 'Login Details')
+      this.toastrService.error('Are required', 'Login Details');
       return;
     }
     if (this.loginForm.valid && !this.isRequestInProgress) {
       this.isRequestInProgress = true;
       this.loginService.getAllUsers().subscribe(async (adminData) => {
         await adminData.forEach((admin) => {
-          if(admin.userId.toString() === this.loginForm.value.username) {
+          if (admin.userId.toString() === this.loginForm.value.username) {
             this.isAdminFound = true;
             if (admin.password === this.loginForm.value.password) {
-              localStorage.setItem("userId", this.loginForm.value.username);
+              localStorage.setItem('userId', this.loginForm.value.username);
               window.location.reload();
               this.toastrService.success('Successfully', 'Logged In');
             } else {
