@@ -57,7 +57,6 @@ public class AdminUserController {
 		adminDetails.setName(admin.getName());
 		adminDetails.setPassword(admin.getPassword());
 		adminDetails.setPhoneNumber(admin.getPhoneNumber());
-		adminDetails.setUserId(admin.getUserId());
 		
 		Admin updatedData = adminRepository.save(adminDetails);
 		return ResponseEntity.ok(updatedData);
